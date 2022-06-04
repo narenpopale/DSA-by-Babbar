@@ -3,6 +3,8 @@
 #include<iostream>
 using namespace std;
 
+// function for finding the square root of a number without precision
+
 int findSqrt(int n){
     int s = 0,e = n,ans = 0;
 
@@ -32,11 +34,30 @@ int findSqrt(int n){
     return ans;
 }
 
-int main(){
+// function for finding the square root of a number with precision
 
-    int n = 777;
+double morePrecision(int n, int precision, int tempSol) {
+    
+    double factor = 1;
+    double ans = tempSol;
 
-    cout << findSqrt(n) <<endl;
+    for(int i=0; i<precision; i++) {
+        factor = factor/10;
+
+        for(double j=ans; j*j<n; j= j+factor ){
+            ans = j;
+        }
+    }
+    return ans;
+}
+
+int main() {
+    int n;
+    cout <<" Enter the number " << endl;
+    cin >> n;
+
+    int tempSol = sqrtInteger(n);
+    cout <<" Answer is " << morePrecision(n, 3, tempSol) << endl;
 
     return 0;
 }
